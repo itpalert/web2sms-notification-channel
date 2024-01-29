@@ -16,7 +16,7 @@ This package makes it easy to send notifications using [web2sms](https://www.web
 You can install the package via composer:
 
 ``` bash
-composer require 
+composer require itpalert/web2sms-notification-channel
 ```
 
 ### Setting up the web2sms service
