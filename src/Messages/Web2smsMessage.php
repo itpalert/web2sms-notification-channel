@@ -163,9 +163,9 @@ class Web2smsMessage
     }
 
     /**
-     * Set the Vonage client instance.
+     * Set the web2sms client instance.
      *
-     * @param  \Vonage\Client  $client
+     * @param  ITPalert\Web2sms\Client  $client
      * @return $this
      */
     public function usingClient($client)
