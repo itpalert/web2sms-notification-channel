@@ -54,11 +54,11 @@ class Web2smsMessage
     public $schedule;
 
     /**
-     * If the message should be visible.
+     * The text shown in place of the actual message.
      *
      * @var bool
      */
-    public $visible = false;
+    public $displayedMessage = '';
 
     /**
      * Create a new message instance.
@@ -150,14 +150,14 @@ class Web2smsMessage
     }
 
     /**
-     * Set if the message should be visible.
+     * Set the text which will be shown in the dashboard in place of the actual message content.
      *
-     * @param  bool  $visible
+     * @param  string  $displayedMessage
      * @return $this
      */
-    public function visible($visible)
+    public function displayedMessage($displayedMessage)
     {
-        $this->visible = $visible;
+        $this->displayedMessage = $displayedMessage;
 
         return $this;
     }

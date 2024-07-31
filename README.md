@@ -72,7 +72,7 @@ public function routeNotificationForWeb2sms(Notification $notification)
 - `clientReference(string $clientReference)`: Set the client reference (up to 40 characters).
 - `statusCallback(string $callback)`: Set the webhook callback URL to update the message status.
 - `schedule(string $schedule)`: Set the date the message should sent at.
-- `visible(bool $visible)`: Set if the message should be visible at the web2sms dashboard.
+- `displayedMessage(string $displayedMessage)`:Set the text which will be shown in the dashboard in place of the actual message content.
 - `usingClient(Client $client)`: Set the web2sms client instance.
 
 ## Credits

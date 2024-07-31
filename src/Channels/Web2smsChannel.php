@@ -70,7 +70,7 @@ class Web2smsChannel
             $web2smsSms->setDeliveryReceiptCallback($message->statusCallback);
         }
 
-        $web2smsSms->setVisible($message->visible);
+        $web2smsSms->setDisplayedMessage($message->displayedMessage);
 
         if ($message->schedule) {
             $web2smsSms->setSchedule($message->schedule);
