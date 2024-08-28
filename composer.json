@@ -3,7 +3,7 @@
     "description": "Web2sms Notification Channel for laravel.",
     "keywords": ["laravel", "notifications", "web2sms"],
     "license": "MIT",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "authors": [
         {
             "name": "Gere Attila",
