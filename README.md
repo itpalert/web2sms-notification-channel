@@ -28,7 +28,20 @@ Add the following env variables to your `.env`:
 ...
 WEB2SMS_KEY=8c78axxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 WEB2SMS_SECRET=e9a689cfxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+WEB2SMS_SMS_FROM=ALERT
+WEB2SMS_ACCOUNT_TYPE=prepaid
 ...
+```
+
+Add the folowing to the `config/services.php`
+
+```php
+    'web2sms' => [
+        'key' => env('WEB2SMS_KEY'),
+        'secret' => env('WEB2SMS_SECRET'),
+        'sms_from' => env('WEB2SMS_SMS_FROM', ''),
+        'account_type' => env('WEB2SMS_ACCOUNT_TYPE', 'prepaid'),
+    ],
 ```
 
 ## Usage
