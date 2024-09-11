@@ -19,23 +19,15 @@ class Web2smsChannel
     protected $client;
 
     /**
-     * The phone number notifications should be sent from.
-     *
-     * @var string
-     */
-    protected $from;
-
-    /**
      * Create a new Web2sms channel instance.
      *
      * @param  ITPalert\Web2sms\Client  $client
      * @param  string  $from
      * @return void
      */
-    public function __construct(Client $client, $from)
+    public function __construct(Client $client)
     {
         $this->client = $client;
-        $this->from = $from;
     }
 
     /**
@@ -59,7 +51,7 @@ class Web2smsChannel
 
         $web2smsSms = new SMS(
             $to,
-            $message->from ?: $this->from,
+            $message->from,
             trim($message->content),
             $message->type
         );
