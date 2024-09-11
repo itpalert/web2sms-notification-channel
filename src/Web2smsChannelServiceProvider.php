@@ -21,8 +21,7 @@ class Web2smsChannelServiceProvider extends ServiceProvider
     {
         $this->app->bind(Web2smsChannel::class, function ($app) {
             return new Web2smsChannel(
-                $app->make(Web2sms::class),
-                $app['config']['services.web2sms.sms_from']
+                $app->make(Web2sms::class)
             );
         });
 
