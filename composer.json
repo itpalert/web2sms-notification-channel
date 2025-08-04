@@ -3,7 +3,7 @@
     "description": "Web2sms Notification Channel for laravel.",
     "keywords": ["laravel", "notifications", "web2sms"],
     "license": "MIT",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "authors": [
         {
             "name": "Gere Attila",
@@ -12,8 +12,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "illuminate/notifications": "^8.0|^9.0|^10.0|^11.0",
-        "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
+        "illuminate/notifications": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0",
         "itpalert/web2sms": "^1.0"
     },
     "require-dev": {
