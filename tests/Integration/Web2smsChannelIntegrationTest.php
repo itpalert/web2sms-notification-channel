@@ -20,22 +20,34 @@ use ITPalert\Web2smsChannel\Web2smsChannelServiceProvider;
  */
 class Web2smsChannelIntegrationTest extends TestCase
 {
+    /**
+     * Setup the test environment.
+     */
     protected function setUp(): void
     {
         parent::setUp();
     }
 
+    /**
+     * Clean up the testing environment before the next test.
+     */
     protected function tearDown(): void
     {
         Mockery::close();
         parent::tearDown();
     }
 
+    /**
+     * Get package providers.
+     */
     protected function getPackageProviders($app): array
     {
         return [Web2smsChannelServiceProvider::class];
     }
 
+    /**
+     * Define environment setup.
+     */
     protected function getEnvironmentSetUp($app): void
     {
         $app['config']->set('services.web2sms', [
