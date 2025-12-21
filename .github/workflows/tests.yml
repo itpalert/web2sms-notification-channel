@@ -66,7 +66,7 @@ jobs:
         run: composer run-script test:unit
 
       - name: Execute Integration Tests
-        run: composer run-script test:feature
+        run: composer run-script test:integration
 
       - name: Execute All Tests
         run: composer test
