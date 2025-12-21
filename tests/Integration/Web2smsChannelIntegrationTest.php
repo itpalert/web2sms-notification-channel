@@ -20,6 +20,11 @@ use ITPalert\Web2smsChannel\Web2smsChannelServiceProvider;
  */
 class Web2smsChannelIntegrationTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+    }
+
     protected function tearDown(): void
     {
         Mockery::close();
