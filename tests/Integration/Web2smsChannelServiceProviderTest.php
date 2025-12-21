@@ -35,6 +35,11 @@ class Web2smsChannelServiceProviderTest extends TestCase
     /** @test */
     public function it_registers_the_channel(): void
     {
+        // Mock the Client since it requires CredentialsInterface
+        $this->app->singleton(Client::class, function () {
+            return Mockery::mock(Client::class);
+        });
+
         $channel = $this->app->make(Web2smsChannel::class);
 
         $this->assertInstanceOf(Web2smsChannel::class, $channel);
