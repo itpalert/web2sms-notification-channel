@@ -21,6 +21,12 @@ use ITPalert\Web2smsChannel\Web2smsChannelServiceProvider;
 class Web2smsChannelIntegrationTest extends TestCase
 {
     /**
+     * Workaround for Orchestra Testbench 9.0.0-9.1.3 bug with $latestResponse property.
+     * Fixed in 9.1.4: "Allow $latestResponse static property to be optional"
+     */
+    protected static $latestResponse;
+
+    /**
      * Setup the test environment.
      */
     protected function setUp(): void
