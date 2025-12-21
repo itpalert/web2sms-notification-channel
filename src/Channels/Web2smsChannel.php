@@ -3,36 +3,26 @@
 namespace ITPalert\Web2smsChannel\Channels;
 
 use Illuminate\Notifications\Notification;
-
 use ITPalert\Web2sms\SMS;
 use ITPalert\Web2sms\Client;
-
 use ITPalert\Web2smsChannel\Messages\Web2smsMessage;
 
 class Web2smsChannel
 {
     /**
      * The Web2sms client instance.
-     *
-     * @var ITPalert\Web2sms\Client
      */
-    protected $client;
+    protected Client $client;
 
     /**
      * The phone number notifications should be sent from.
-     *
-     * @var string
      */
-    protected $from;
+    protected string $from;
 
     /**
      * Create a new Web2sms channel instance.
-     *
-     * @param  ITPalert\Web2sms\Client  $client
-     * @param  string  $from
-     * @return void
      */
-    public function __construct(Client $client, $from)
+    public function __construct(Client $client, string $from)
     {
         $this->client = $client;
         $this->from = $from;
@@ -42,19 +32,26 @@ class Web2smsChannel
      * Send the given notification.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
-     * @return ITPalert\Web2sms\SMS\Collection|null
+     * @return \ITPalert\Web2sms\Responses\SendResponse|null
      */
-    public function send($notifiable, Notification $notification)
+    public function send(mixed $notifiable, Notification $notification): mixed
     {
-        if (! $to = $notifiable->routeNotificationFor('Web2sms', $notification)) {
-            return;
+        $to = $notifiable->routeNotificationFor('Web2sms', $notification);
+        
+        if (! $to) {
+            return null;
         }
 
         $message = $notification->toWeb2sms($notifiable);
 
         if (is_string($message)) {
             $message = new Web2smsMessage($message);
+        }
+
+        if (! $message instanceof Web2smsMessage) {
+            throw new \InvalidArgumentException(
+                'Notification must return a string or Web2smsMessage instance from toWeb2sms method'
+            );
         }
 
         $web2smsSms = new SMS(
@@ -64,15 +61,19 @@ class Web2smsChannel
             $message->type
         );
 
-        $web2smsSms->setClientRef($message->clientReference);
+        if ($message->clientReference !== '') {
+            $web2smsSms->setClientRef($message->clientReference);
+        }
 
-        if ($message->statusCallback) {
+        if ($message->statusCallback !== '') {
             $web2smsSms->setDeliveryReceiptCallback($message->statusCallback);
         }
 
-        $web2smsSms->setDisplayedMessage($message->displayedMessage);
+        if ($message->displayedMessage !== '') {
+            $web2smsSms->setDisplayedMessage($message->displayedMessage);
+        }
 
-        if ($message->schedule) {
+        if ($message->schedule !== null) {
             $web2smsSms->setSchedule($message->schedule);
         }
 

@@ -2,82 +2,62 @@
 
 namespace ITPalert\Web2smsChannel\Messages;
 
+use ITPalert\Web2sms\Client;
+
 class Web2smsMessage
 {
     /**
      * The message content.
-     *
-     * @var string
      */
-    public $content;
+    public string $content;
 
     /**
      * The phone number the message should be sent from.
-     *
-     * @var string
      */
-    public $from;
+    public string $from = '';
 
     /**
      * The message type.
-     *
-     * @var string
      */
-    public $type = 'text';
+    public string $type = 'text';
 
     /**
-     * The custom Vonage client instance.
-     *
-     * @var \ITPalert\Web2sms\Client|null
+     * The custom Web2sms client instance.
      */
-    public $client;
+    public ?Client $client = null;
 
     /**
      * The client reference.
-     *
-     * @var string
      */
-    public $clientReference = '';
+    public string $clientReference = '';
 
     /**
      * The webhook to be called with status updates.
-     *
-     * @var string
      */
-    public $statusCallback = '';
+    public string $statusCallback = '';
 
     /**
      * The (optional) date the message should sent at.
-     *
-     * @var string|null
      */
-    public $schedule;
+    public ?string $schedule = null;
 
     /**
      * The text shown in place of the actual message.
-     *
-     * @var bool
      */
-    public $displayedMessage = '';
+    public string $displayedMessage = '';
 
     /**
      * Create a new message instance.
-     *
-     * @param  string  $content
-     * @return void
      */
-    public function __construct($content = '')
+    public function __construct(string $content = '')
     {
         $this->content = $content;
     }
 
     /**
      * Set the message content.
-     *
-     * @param  string  $content
-     * @return $this
      */
-    public function content($content)
+    public function content(string $content): self
     {
         $this->content = $content;
 
@@ -86,23 +66,18 @@ class Web2smsMessage
 
     /**
      * Set the phone number the message should be sent from.
-     *
-     * @param  string  $from
-     * @return $this
      */
-    public function from($from)
+    public function from(string $from): self
     {
         $this->from = $from;
 
         return $this;
     }
 
-     /**
-     * Set the message type.
-     *
-     * @return $this
+    /**
+     * Set the message type to unicode.
      */
-    public function unicode()
+    public function unicode(): self
     {
         $this->type = 'unicode';
 
@@ -111,12 +86,13 @@ class Web2smsMessage
 
     /**
      * Set the client reference (up to 40 characters).
-     *
-     * @param  string  $clientReference
-     * @return $this
      */
-    public function clientReference($clientReference)
+    public function clientReference(string $clientReference): self
     {
+        if (strlen($clientReference) > 40) {
+            throw new \InvalidArgumentException('Client reference cannot exceed 40 characters');
+        }
+
         $this->clientReference = $clientReference;
 
         return $this;
@@ -124,11 +100,8 @@ class Web2smsMessage
 
     /**
      * Set the webhook callback URL to update the message status.
-     *
-     * @param  string  $callback
-     * @return $this
      */
-    public function statusCallback(string $callback)
+    public function statusCallback(string $callback): self
     {
         $this->statusCallback = $callback;
 
@@ -137,12 +110,8 @@ class Web2smsMessage
 
     /**
      * Set the date the message should sent at.
-     *
-     * @param  \DateTimeInterface|string  $sendAt
-     * @return $this
-     * @throws \Exception
      */
-    public function schedule($schedule)
+    public function schedule(string $schedule): self
     {
         $this->schedule = $schedule;
 
@@ -151,11 +120,8 @@ class Web2smsMessage
 
     /**
      * Set the text which will be shown in the dashboard in place of the actual message content.
-     *
-     * @param  string  $displayedMessage
-     * @return $this
      */
-    public function displayedMessage($displayedMessage)
+    public function displayedMessage(string $displayedMessage): self
     {
         $this->displayedMessage = $displayedMessage;
 
@@ -164,11 +130,8 @@ class Web2smsMessage
 
     /**
      * Set the web2sms client instance.
-     *
-     * @param  ITPalert\Web2sms\Client  $client
-     * @return $this
      */
-    public function usingClient($client)
+    public function usingClient(Client $client): self
     {
         $this->client = $client;
 
