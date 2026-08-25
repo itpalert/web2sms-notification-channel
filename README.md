@@ -23,7 +23,8 @@ This package makes it easy to send notifications using [Web2sms](https://www.web
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Available Message Methods](#available-message-methods)
-- [Testing](#testing)
+- [Testing Your Application](#testing-your-application)
+- [Testing This Package](#testing-this-package)
 - [Changelog](#changelog)
 - [Credits](#credits)
 - [License](#license)
@@ -182,10 +183,13 @@ Use a different Web2sms client for specific notifications:
 ```php
 public function toWeb2sms($notifiable): Web2smsMessage
 {
-    $customClient = new \ITPalert\Web2sms\Client(
-        'different-key',
-        'different-secret'
-    );
+    // usingClient() takes ITPalert\Web2sms\Contracts\Client, so anything
+    // implementing it works here, including Web2smsFake in tests.
+    $customClient = \ITPalert\Web2sms\Web2sms::make([
+        'key' => 'different-key',
+        'secret' => 'different-secret',
+        'account_type' => 'prepaid',
+    ])->client();
 
     return (new Web2smsMessage('Your message'))
         ->usingClient($customClient);
@@ -207,7 +211,33 @@ public function toWeb2sms($notifiable): Web2smsMessage
 }
 ```
 
-## Testing
+## Testing Your Application
+
+`itpalert/web2sms` v3 hands out a recording fake under the `testing`
+environment, and this channel accepts it, so an application's test suite cannot
+send a real text through this package by accident. Nothing needs configuring.
+
+```php
+use ITPalert\Web2sms\Contracts\Client;
+use ITPalert\Web2sms\SMS;
+
+$fake = app(Client::class);          // the fake, while testing
+
+$user->notify(new ExpiryReminder());
+
+$fake->assertSentCount(1)
+     ->assertSentTo('+40712345678', fn (SMS $sms) => str_contains($sms->getMessage(), 'expires'));
+```
+
+To send for real from a test, name the driver:
+
+```php
+config()->set('services.web2sms.driver', 'api');
+```
+
+See the `itpalert/web2sms` README for the full driver list.
+
+## Testing This Package
 
 Run the tests with:
 

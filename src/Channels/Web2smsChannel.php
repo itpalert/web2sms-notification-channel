@@ -4,7 +4,7 @@ namespace ITPalert\Web2smsChannel\Channels;
 
 use Illuminate\Notifications\Notification;
 use ITPalert\Web2sms\SMS;
-use ITPalert\Web2sms\Client;
+use ITPalert\Web2sms\Contracts\Client;
 use ITPalert\Web2smsChannel\Messages\Web2smsMessage;
 
 class Web2smsChannel

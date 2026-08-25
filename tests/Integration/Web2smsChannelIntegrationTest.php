@@ -6,7 +6,7 @@ use Mockery;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Notification as NotificationFacade;
-use ITPalert\Web2sms\Client;
+use ITPalert\Web2sms\Contracts\Client;
 use ITPalert\Web2sms\SMS;
 use ITPalert\Web2smsChannel\Channels\Web2smsChannel;
 use ITPalert\Web2smsChannel\Messages\Web2smsMessage;

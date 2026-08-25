@@ -5,7 +5,7 @@ namespace ITPalert\Web2smsChannel\Tests;
 use Mockery;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Notifications\ChannelManager;
-use ITPalert\Web2sms\Client;
+use ITPalert\Web2sms\Contracts\Client;
 use ITPalert\Web2smsChannel\Channels\Web2smsChannel;
 use ITPalert\Web2smsChannel\Web2smsChannelServiceProvider;
 

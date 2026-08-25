@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Notifications\ChannelManager;
 use ITPalert\Web2smsChannel\Channels\Web2smsChannel;
-use ITPalert\Web2sms\Client;
+use ITPalert\Web2sms\Contracts\Client;
 
 class Web2smsChannelServiceProvider extends ServiceProvider
 {

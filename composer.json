@@ -3,7 +3,7 @@
     "description": "Web2sms Notification Channel for Laravel with full PHP 8.2+ type safety.",
     "keywords": ["laravel", "notifications", "web2sms", "sms", "romania"],
     "license": "MIT",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "authors": [
         {
             "name": "Gere Attila",
@@ -14,7 +14,7 @@
         "php": "^8.2",
         "illuminate/notifications": "^10.0|^11.0|^12.0",
         "illuminate/support": "^10.0|^11.0|^12.0",
-        "itpalert/web2sms": "^2.2"
+        "itpalert/web2sms": "^3.0"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.2",

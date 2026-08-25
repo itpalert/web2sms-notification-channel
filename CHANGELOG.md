@@ -4,6 +4,30 @@ All notable changes to `web2sms-notification-channel` will be documented in this
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-08-25
+
+### Breaking
+- Requires `itpalert/web2sms ^3.0`.
+- The channel, the message's `usingClient()` override and the service provider all
+  use `ITPalert\Web2sms\Contracts\Client` instead of the concrete
+  `ITPalert\Web2sms\Client`. Anything constructing `Web2smsChannel` by hand, or
+  binding a client into the container for it, must use the contract.
+
+### Why
+Sending a text costs money per attempt and arrives on a real handset.
+`itpalert/web2sms` v3 hands out a recording fake under the testing environment so
+an application's suite cannot send one by accident, but the fake implements the
+contract rather than extending the concrete client. While this package
+type-hinted the concrete class the channel rejected it outright with a
+`TypeError`, which put every application sending through this channel back to
+texting real numbers from its tests.
+
+### Added
+- `Web2smsFakeIntegrationTest`: registers both service providers and binds no
+  client by hand, so it exercises what an application actually gets. The rest of
+  the suite hand-binds its own mock and therefore passed even while the two
+  packages could not work together at all.
+
 ## [2.0.0] - 2024-12-21
 
 ### Added

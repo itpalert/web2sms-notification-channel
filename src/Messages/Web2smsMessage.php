@@ -2,7 +2,7 @@
 
 namespace ITPalert\Web2smsChannel\Messages;
 
-use ITPalert\Web2sms\Client;
+use ITPalert\Web2sms\Contracts\Client;
 
 class Web2smsMessage
 {
